@@ -1,0 +1,43 @@
+<%- include('header') -%> 
+
+<!-- About Page -->
+<div class="about-page">
+  <div class="row">
+    <div class="col-sm-12 col-lg-8 about-page-padding">
+      <h3>RADIO STATION</h3>
+      <h5>Exclusive Shows | Original Podcasts | And Much more</h5>
+      <p class="about-page-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur placerat nulla, sit amet faucibus augue tincidunt consequat. Duis eget mi neque. Maecenas ullamcorper velit nunc, vitae facilisis metus scelerisque ut. Proin ut neque id ligula mattis iaculis. Donec consequat felis quis mollis congue. Mauris vulputate est eget augue placerat porta. Nam varius lectus quis dui venenatis sollicitudin nec id neque.</p>
+      
+      <h5 class="contact-form-heading">CONTACT US</h5>
+      <form action="/contact-form" method="post">
+        <input class="form-control" type="text" name="name" placeholder="Name" autocomplete="off">
+        <input class="form-control" type="email" name="email" placeholder="E-mail" autocomplete="off">
+        <textarea class="form-control" name="message" rows="4" placeholder="Message here"></textarea>
+        <button class="btn btn-primary w-100" type="submit">SUBMIT</button>
+      </form>
+    </div>
+
+    <div class="col-sm-12 col-lg-4">
+      <div class="card">
+        <img src="/images/jims-logo.png" class="card-img-top mx-auto">
+        <div class="card-body">
+          <h5 class="card-title">Jagannath International Management School</h5>
+          <hr>
+          <p class="card-text">
+            Affiliated to Guru Gobind Singh Indraprastha University, New Delhi <br>
+            Accredited with ‘A’ Grade by NAAC <hr>
+            <p class="about-page-details">
+              <i class="fas fa-map-marker-alt"></i>&ensp; Vasant Kunj, Pocket-9, Sector-B, New Delhi-110070
+              <br>
+              <i class="fas fa-phone"></i>&ensp; 011-4061-9300
+              <br>
+              <i class="fas fa-envelope"></i>&ensp; jims.vk@jagannath.org
+            </p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('footer') -%> 
