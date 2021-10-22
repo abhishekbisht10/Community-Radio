@@ -393,6 +393,10 @@ body {
   margin-bottom: 10px;
 }
 
+button[type=submit] {
+  margin-top: 10px;
+}
+
 .about-page .card {
   border-width: 2px;
   margin: 20px 30px;
@@ -412,6 +416,16 @@ body {
 .about-page-details {
   text-align: left;
   margin-bottom: -5px;
+}
+
+.alert {
+  font-size: 0.9rem; 
+  padding-top: 0.8rem;  
+  padding-bottom: 0.8rem;
+}
+
+.alert-dismissible .btn-close {
+  padding: 1rem;
 }
 
 /* Mobile site for About */

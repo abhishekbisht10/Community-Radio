@@ -9,7 +9,17 @@
       <p class="about-page-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur placerat nulla, sit amet faucibus augue tincidunt consequat. Duis eget mi neque. Maecenas ullamcorper velit nunc, vitae facilisis metus scelerisque ut. Proin ut neque id ligula mattis iaculis. Donec consequat felis quis mollis congue. Mauris vulputate est eget augue placerat porta. Nam varius lectus quis dui venenatis sollicitudin nec id neque.</p>
       
       <h5 class="contact-form-heading">CONTACT US</h5>
-      <form action="/contact-form" method="post">
+
+      <% if(typeof alert != 'undefined') { %>
+      <% alert.forEach( function(error) { %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= error.msg %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <% }) %>
+      <% } %>
+
+      <form action="/about" method="post">
         <input class="form-control" type="text" name="name" placeholder="Name" autocomplete="off">
         <input class="form-control" type="email" name="email" placeholder="E-mail" autocomplete="off">
         <textarea class="form-control" name="message" rows="4" placeholder="Message here"></textarea>
