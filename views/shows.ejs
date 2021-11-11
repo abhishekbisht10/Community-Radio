@@ -14,7 +14,7 @@
 <div class="all-shows-box">
 
     <!-- Quotes -->
-    <div id="quotes" class="row">
+    <div class="row">
         <div class="col-sm-12 col-lg-5">
 
             <div class="card">
@@ -63,7 +63,7 @@
     <hr>
 
     <!-- Educational -->
-    <div id="educational" class="row">
+    <div class="row">
         <div class="col-sm-12 col-lg-5">
 
             <div class="card">
@@ -112,7 +112,7 @@
     <hr>
 
     <!-- Motivational -->
-    <div id="motivational" class="row">
+    <div class="row">
         <div class="col-sm-12 col-lg-5">
 
             <div class="card">
@@ -161,7 +161,7 @@
     <hr>
 
     <!-- Other Shows -->
-    <div id="other" class="row">
+    <div class="row">
         <div class="col-sm-12 col-lg-5">
 
             <div class="card">
@@ -206,13 +206,56 @@
     
         </div>
     </div>
+
+     <!-- Database Test -->
+
+    <% show.forEach( function(showList) { %>
+ 
+     <hr>
+     <div class="row">
+        <div class="col-sm-12 col-lg-5">
+
+            <div class="card">
+                <img src="/images/show-other.jpg" class="card-img-top" alt="quotes-image">
+                <div class="card-body">
+                  <h5 class="card-title"><i class="fas fa-bars"></i>&nbsp; <%= showList.name %></h5>
+                  <hr>
+                  <p class="card-text"> <%= showList.description %> </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-12 col-lg-5 audio-scroll-box">
+
+            <% let count = 0; %>
+            <% sauce.forEach( function(sauceList) { %>
+              
+                <% if(sauceList.code === showList.code && count < 3) { %>
+
+            <div class="alert alert-light" role="alert">
+                <h5 class="alert-heading"> <%= sauceList.name %> </h5>
+                <hr>
+                <p> <%= sauceList.description %> </p>
+                <audio controls>
+                    <source src="<%= sauceList.link %>" type="audio/mpeg">
+                </audio>
+            </div>
+
+                <% count++; %>
+
+            <% }  }); %>
+    
+            <div class="alert alert-light" role="alert">
+                <a class="view-more" href="/category/<%=showList.name%>">View more</a>
+            </div>
+
+        </div>
+    </div>
+
+    <% }); %>
     
 </div>
-
-    <script>
-        var show = document.getElementById("<%=showId%>");
-        show.scrollIntoView({behavior:"smooth", block:"center"});
-    </script>
 
 <%- include('footer') -%>  
     

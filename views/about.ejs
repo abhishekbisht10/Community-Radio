@@ -1,12 +1,18 @@
 <%- include('header') -%> 
 
 <!-- About Page -->
+<% if(typeof feedback != 'undefined') { %>
+     <script>
+       alert("<%=feedback%>");
+     </script>
+<% } %>
+
 <div class="about-page">
   <div class="row">
     <div class="col-sm-12 col-lg-8 about-page-padding">
       <h3>RADIO STATION</h3>
       <h5>Exclusive Shows | Original Podcasts | And Much more</h5>
-      <p class="about-page-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur placerat nulla, sit amet faucibus augue tincidunt consequat. Duis eget mi neque. Maecenas ullamcorper velit nunc, vitae facilisis metus scelerisque ut. Proin ut neque id ligula mattis iaculis. Donec consequat felis quis mollis congue. Mauris vulputate est eget augue placerat porta. Nam varius lectus quis dui venenatis sollicitudin nec id neque.</p>
+      <p class="about-page-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur placerat nulla, sit amet faucibus augue tincidunt consequat. Duis eget mi neque. Maecenas ullamcorper velit nunc, vitae facilisis metus scelerisque ut. Proin ut neque id ligula mattis iaculis. Donec consequat felis quis mollis congue. Mauris vulputate est eget augue placerat porta.</p>
       
       <h5 class="contact-form-heading">CONTACT US</h5>
 
@@ -23,7 +29,7 @@
         <input class="form-control" type="text" name="name" placeholder="Name" autocomplete="off">
         <input class="form-control" type="email" name="email" placeholder="E-mail" autocomplete="off">
         <textarea class="form-control" name="message" rows="4" placeholder="Message here"></textarea>
-        <button class="btn btn-primary w-100" type="submit">SUBMIT</button>
+        <button class="btn w-100" type="submit">SUBMIT</button>
       </form>
     </div>
 
