@@ -1,13 +1,13 @@
-<%- include('header') -%>
+<%- include('partials/header') -%>
 
 <div class="category-page">
-  <div class="h-100 p-4 mb-4 bg-white border rounded-3 row category-jumbo">
-    <div class="col-sm-12 col-lg-5 p-1">
+  <div class="h-100 p-5 pt-4 pb-4 mb-4 bg-white border rounded-3 row category-jumbo">
+    <div class="col-sm-12 col-lg-5 p-2 category-left">
       <h2><%=category.name%></h2>
       <p><%=category.description%></p>
     </div>
-    <div class="col-sm-12 col-lg-4 text-center">
-      <img class="col-12" src="https://image.freepik.com/free-vector/people-recording-podcast-together_23-2148777693.jpg" alt="category-image">
+    <div class="col-sm-12 col-lg-4 text-end category-right">
+      <img src="/images/<%=category.image%>" alt="category-image" height="220px">
     </div>
   </div> 
 
@@ -27,4 +27,4 @@
   </div>
 </div>
 
-<%- include('footer') -%>
+<%- include('partials/footer') -%>

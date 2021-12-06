@@ -1,37 +1,23 @@
-<%- include('header') -%>    
+<%- include('partials/header') -%>    
 
 <!-- HOME -->
 <div class="home">
 </div>  
 <!-- SHOW -->
-    <div class="shows">
+  <div class="shows">
         <h4>TOP SHOWS</h4>
 
-        <div class="row shows-box">
-            <div class="card col-sm-12 col-lg-3">
-                <img src="images/ts1.png" class="card-img-top">
+        <div class="row shows-box mt-3">
+          <% for(var i=0; i<3; i++) { %>
+            <div class="card col-sm-12 col-lg-3 mt-1">
+                <img src="images/<%= show[i].image %>" class="card-img-top">
                 <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-quote-right fa-xs"></i>&nbsp; <%= show[0].name %> </h5>
+                  <h5 class="card-title"><i class="fas fa-quote-right fa-xs"></i>&nbsp; <%= show[i].name %> </h5>
                   <hr class="design">
-                  <p class="card-text"> <%= show[0].description %> </p>
+                  <p class="card-text"> <%= show[i].description %> </p>
                 </div>
               </div>
-              <div class="card col-sm-12 col-lg-3">
-                <img src="images/ts3.png" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-book-reader fa-xs"></i>&nbsp; <%= show[1].name %> </h5>
-                  <hr class="design">
-                  <p class="card-text"> <%= show[1].description %> </p>
-                </div>
-              </div>
-              <div class="card col-sm-12 col-lg-3">
-                <img src="images/ts2.png" class="card-img-top">
-                <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-fist-raised fa-xs"></i>&nbsp; <%= show[2].name %> </h5>
-                  <hr class="design">
-                  <p class="card-text"> <%= show[2].description %> </p>
-                </div>
-              </div>
+          <% } %>   
         </div>
     </div>
 
@@ -40,32 +26,37 @@
     <h4>PODCASTS</h4>
 
     <div class="row pod-box">
+
       <div class="col-sm-12 col-lg-6 pod-box-img">
-        <img src="images/podcast.png" alt="Podcast image" class="col-12">
+        <img src="images/podcast.png" alt="Podcast image" class="col-11">
       </div>
+
       <div class="col-sm-12 col-lg-6">
+
+        <% for(var i=0; i<3; i++) { %>
         <div class="card">
           <div class="card-body">
-              <img src="images/ts1.png">
-              <span>A well-known quote, contained in a blockquote element.</span>
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+
+            <div class="row">
+
+              <div class="col-sm-12 col-lg-2 p-0">
+                <img src="images/<%= podcasts[i].image %>">
+              </div>
+
+              <div class="col-sm-12 col-lg-10 ps-2 pe-4 pt-1 pod-box-des">
+                <% let description = podcasts[i].description.substring(0, 100) + " ..."; %>
+                <span class="text-start"><p><%= description %></p></span>
+                <footer class="blockquote-footer text-end">Podcast by <cite title="Source Title"><%= podcasts[i].name %></cite></footer>  
+              </div>
+            
+            </div>
+
           </div>
         </div>
-        <div class="card">
-          <div class="card-body">
-              <img src="images/ts3.png">
-              <span>A well-known quote, contained in a blockquote element.</span>
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-              <img src="images/ts2.png">
-              <span>A well-known quote, contained in a blockquote element.</span>
-              <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-          </div>
-        </div>
+        <% } %>
+
       </div>
+
     </div>
   </div>
 
@@ -105,4 +96,4 @@
     </div>
   </div>
 
-  <%- include('footer') -%>  
+  <%- include('partials/footer') -%>  

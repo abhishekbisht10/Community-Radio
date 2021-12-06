@@ -1,0 +1,44 @@
+<%- include('partials/header') -%>
+
+<% if(typeof feedback != 'undefined') { %>
+    <script>
+      alert("<%= feedback %>");
+    </script>
+<% } %>
+
+<div class="record-page">
+    <div class="row">
+
+        <img class="col-sm-12 col-lg-6 record-page-img" src="/images/create.svg" alt="create podcast image">
+    
+        <div class="col-sm-12 col-lg-6 record-page-box">
+            <h4><i class="fas fa-file-upload"></i>&ensp;Upload Podcast</h4>
+            <hr>
+            <div class="mb-2">To upload a podcast :</div>
+            <ul>
+                <li>Fill the form given below.</li>
+                <li>Upload the audio file you recorded.</li>
+            </ul>           
+            <p class="mt-4 mb-4"> Podcast upload form :</p>
+
+            <% if(typeof alert != 'undefined') { %>
+                <% alert.forEach( function(error) { %>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <%= error.msg %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <% }) %>
+            <% } %>
+
+            <form class="upload-form" action="/podcast/upload" method="post" enctype="multipart/form-data">
+                <input class="form-control" type="text" name="name" placeholder="Name" autocomplete="off" required>
+                <input class="form-control" type="email" name="email" placeholder="E-mail" autocomplete="off" required>
+                <input class="form-control" type="file" name="audio" accept="audio/mp3" single required>
+                <textarea class="form-control" name="description" rows="2" placeholder="Description here" required></textarea>
+                <button class="btn w-100" type="submit">SUBMIT</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') -%>

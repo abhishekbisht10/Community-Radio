@@ -1,144 +1,48 @@
-<%- include('header') -%> 
+<%- include('partials/header') -%> 
 
-    <!-- PODCAST BANNER -->
-    <div class="podcast-page-banner">
-      <video muted autoplay loop>
-        <source src="/videos/podcast-vid.mp4#t=4" type="video/mp4" />
-      </video>
-      <div class="w-100 podcast-page-heading">
-        <h4>PODCAST</h4>
-      </div>
-    </div>
+<!-- PODCAST BANNER -->
+<div class="podcast-page-banner">
+  <video muted autoplay loop>
+    <source src="/videos/podcast-vid.mp4#t=4" type="video/mp4" />
+  </video>
+  <div class="w-100 podcast-page-heading">
+    <h4>PODCAST</h4>
+  </div>
+</div>
 
-    <!-- PODCAST HERE -->
-    <div class="podcast-box">
-      <div class="row">
-        <div class="card col-sm-12 col-lg-2">
-          <div class="card-img-top">
-            <img src="images/ts1.png" />
-          </div>
-          <div class="card-body">
-            <div class="card-title">- Lorem Ipsum</div>
-          </div>
+<!-- PODCAST HERE -->
+<div class="podcast-box">
+  <div class="row">
+    
+    <% for(var i=0; i<podcast.length; i++) { %>
+
+      <div class="card col-sm-12 col-lg-2">
+        <div class="card-img-top">
+          <img src="images/<%= podcast[i].image %>" />
         </div>
-        <div class="card col-sm-12 col-lg-4">
-          <p>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content
-          </p>
-          <audio controls class="mx-auto">
-            <source src="/audios/quote-1.mp3" type="audio/mpeg" />
-          </audio>
-        </div>
-
-        <span class="space-sm"></span>
-
-        <div class="card col-sm-12 col-lg-2">
-          <div class="card-img-top">
-            <img src="images/ts2.png" />
-          </div>
-          <div class="card-body">
-            <div class="card-title">- Lorem Ipsum</div>
-          </div>
-        </div>
-        <div class="card col-sm-12 col-lg-4">
-          <p>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content
-          </p>
-          <audio controls class="mx-auto">
-            <source src="/audios/quote-1.mp3" type="audio/mpeg" />
-          </audio>
+        <div class="card-body pt-1">
+          <div class="card-title"><%= podcast[i].name %> </div>
         </div>
       </div>
-
-      <div class="space-lg"></div>
-
-      <div class="row">
-        <div class="card col-sm-12 col-lg-2">
-          <div class="card-img-top">
-            <img src="images/ts3.png" />
-          </div>
-          <div class="card-body">
-            <div class="card-title">- Lorem Ipsum</div>
-          </div>
-        </div>
-        <div class="card col-sm-12 col-lg-4">
-          <p>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content
-          </p>
-          <audio controls class="mx-auto">
-            <source src="/audios/quote-1.mp3" type="audio/mpeg" />
-          </audio>
-        </div>
-
-        <span class="space-sm"></span>
-
-        <div class="card col-sm-12 col-lg-2">
-          <div class="card-img-top">
-            <img src="images/ts1.png" />
-          </div>
-          <div class="card-body">
-            <div class="card-title">- Lorem Ipsum</div>
-          </div>
-        </div>
-        <div class="card col-sm-12 col-lg-4">
-          <p>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content
-          </p>
-          <audio controls class="mx-auto">
-            <source src="/audios/quote-1.mp3" type="audio/mpeg" />
-          </audio>
-        </div>
+      <div class="card col-sm-12 col-lg-4">
+        <p class="ps-1 pe-1"> <%= podcast[i].description %> </p>
+        <audio controls class="mx-auto mb-3">
+          <source src="/podcasts/<%= podcast[i].link %>" type="audio/mpeg" />
+        </audio>
       </div>
 
-      <div class="space-lg"></div>
+      <span class="space-sm"></span>
 
-      <div class="row">
-        <div class="card col-sm-12 col-lg-2">
-          <div class="card-img-top">
-            <img src="images/ts2.png" />
-          </div>
-          <div class="card-body">
-            <div class="card-title">- Lorem Ipsum</div>
-          </div>
-        </div>
-        <div class="card col-sm-12 col-lg-4">
-          <p>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content
-          </p>
-          <audio controls class="mx-auto">
-            <source src="/audios/quote-1.mp3" type="audio/mpeg" />
-          </audio>
-        </div>
+      <% if(i%2!=0 && i!=0) { %>
+        <div class="m-3"></div>
+      <% } %>
 
-        <span class="space-sm"></span>
+    <% } %>
+  </div>
+</div>
 
-        <div class="card col-sm-12 col-lg-2">
-          <div class="card-img-top">
-            <img src="images/ts2.png" />
-          </div>
-          <div class="card-body">
-            <div class="card-title">- Lorem Ipsum</div>
-          </div>
-        </div>
-        <div class="card col-sm-12 col-lg-4">
-          <p>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content
-          </p>
-          <audio controls class="mx-auto">
-            <source src="/audios/quote-1.mp3" type="audio/mpeg" />
-          </audio>
-        </div>
-      </div>
-    </div>
+<script>
+  document.querySelector("video").playbackRate = 1.5;
+</script>
 
-    <script>
-      document.querySelector("video").playbackRate = 1.5;
-    </script>
-
-<%- include('footer') -%> 
+<%- include('partials/footer') -%> 

@@ -1,0 +1,30 @@
+<%- include('partials/header') -%>
+
+<div class="record-page">
+    <div class="row">
+
+        <img class="col-sm-12 col-lg-6 record-page-img" src="/images/create.svg" alt="create podcast image">
+    
+        <div class="col-sm-12 col-lg-6 record-page-box">
+            <h4><i class="fas fa-microphone"></i>&ensp;Record Podcast</h4>
+            <hr>
+            <div class="mb-2">To record a podcast :</div>
+            <ul>
+                <li>Give access to the microphone.</li>
+                <li>Record the audio and stop when you are done.</li>
+                <li>Download the audio from the link given below.</li>
+            </ul>           
+            <div class="controls">
+                <button type="button" class="btn w-100" id="mic">Get Microphone</button>
+                <button type="button" class="btn w-100" id="record" hidden>Record</button>
+            </div>
+            <div class="record-list" type="none" id="recordings">
+            <p class="text-start">Recording list here:</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/scripts/record.js"></script>
+
+<%- include('partials/footer') -%>

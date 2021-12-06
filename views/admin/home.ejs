@@ -1,0 +1,50 @@
+<%- include('partials/header') -%>
+
+<div class="container-fluid ms-5 me-5">
+    <h4>PODCAST APPROVAL</h4>
+
+    <table class="table table-bordered table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Podcast</th>
+                <th>Description</th>
+                <th>Approved</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% podcast.forEach(element => { %>
+                <tr>
+                    <td> <%=element.name%> </td>
+                    <td> <%=element.email%> </td>
+                    <td> 
+                        <audio controls class="mx-auto">
+                            <source src="/podcasts/<%= element.link %>" type="audio/mpeg" />
+                          </audio>
+                    </td>
+                    <td> <%=element.description%> </td>
+                    <td> 
+                        <% if(element.approved === "no"){ %>
+                            <form action="/admin/podcast" method="post">
+                                <input type="email" name="email" value="<%=element.email%>" hidden>
+                                <input type="text" name="link" value="<%= element.link %>" hidden>
+                                <input type="text" name="approved" value="yes" hidden>
+                                <button class="btn btn-outline-success mt-2">APPROVE</button>
+                            </form>
+                        <% } else { %>
+                            <form action="/admin/podcast" method="post">
+                                <input type="email" name="email" value="<%=element.email%>" hidden>
+                                <input type="text" name="link" value="<%= element.link %>" hidden>
+                                <input type="text" name="approved" value="no" hidden>
+                                <button class="btn btn-outline-danger mt-2">REMOVE</button>
+                            </form>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody> 
+    </table>
+</div>
+
+<%- include('partials/footer') -%>
