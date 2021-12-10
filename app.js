@@ -1,12 +1,32 @@
+require('dotenv').config();
+
 const express = require('express');
-const app = express();
-const md5 = require('md5');
+const ejs = require('ejs');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const passportLocalMongoose = require('passport-local-mongoose');
+
 const {check, validationResult} = require('express-validator');
+
+const app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended:true }));
+
+app.use(session({
+    secret: 'process.env.SECRET',
+    resave: false,
+    saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+mongoose.connect(process.env.DB, {useNewUrlParser: true});
+
 
 // multer for file uploads
 const multer = require('multer');
@@ -25,10 +45,6 @@ let show = [];
 let sauce = [];                                     // global variables to store shows, category, podcasts.
 let podcasts = [];
 
-
-const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/radioStationDB", {useNewUrlParser: true});
-
 const showsSchema = new mongoose.Schema ({
     code: String,
     name: String,
@@ -40,11 +56,9 @@ const showsSchema = new mongoose.Schema ({
 const Shows = new mongoose.model("Shows", showsSchema);
 
 Shows.find( function(err, shows) {
-
   if(err) {
     console.log("shows" + err);
-  }
-  else {
+  } else {
     show = shows;                   // passing to global variable
   }
 });
@@ -60,11 +74,9 @@ const saucesSchema = new mongoose.Schema ({
 const Sauces = new mongoose.model("Sauces", saucesSchema);
 
 Sauces.find( function(err, sauces) {
-
   if(err) {
     console.log("sauces" + err);
-  }
-  else {
+  } else {
     sauce = sauces;                 // passing to global variable
   }
 });
@@ -99,34 +111,34 @@ const adminSchema = new mongoose.Schema({
     password: String
 });
 
+adminSchema.plugin(passportLocalMongoose);
+
 const Admin = new mongoose.model("Admin", adminSchema);
 
+passport.use(Admin.createStrategy());
+passport.serializeUser(Admin.serializeUser());
+passport.deserializeUser(Admin.deserializeUser());
+
 function getSauce(code) {
-
     let sauces = [];
-
     sauce.forEach( function(element) {
         if(element.code === code) {
             sauces.push(element);
         }
     });
-
     return sauces;
 }
 
 function saveForm(name, email, message) {
-    
     const form = new Form({
         name: name,
         email: email,
         message: message
     });
-
     form.save();
 }
 
 function savePodcast(name, email, description, link) {
-
     const podcast = new Podcast({
         name: name,
         email: email,
@@ -135,7 +147,6 @@ function savePodcast(name, email, description, link) {
         approved: "no",         
         image: "ts4.png"        // change this to empty
     });
-
     podcast.save();
 }
 
@@ -217,23 +228,18 @@ app.post("/podcast/upload", upload.single('audio'), [
         if(req.file.mimetype == "audio/mp3" || req.file.mimetype == "audio/mpeg") {
 
             Podcast.find( { approved: "no" }, function(err, podcast) {                  // podcast list check
-
                 if(podcast.length <= 10) {
 
                     savePodcast(req.body.name, req.body.email, req.body.description, req.file.filename);        // line 127 & 128 changed for now 
-                    res.render("upload", {show, feedback: "Thanks for creating the podcast, it will be posted as soon as it gets approved!"});      
-                
-                } else {
-                    
+                    res.render("upload", {show, feedback: "Thanks for creating the podcast, it will be posted as soon as it gets approved!"});           
+                } else {        
                     res.render("upload", {show, feedback: "There are too many podcasts to be approved. Please try again later!"});
                 }
             });
-            
         } else {
             res.render("upload", {show, alert: "File type must be mp3/mpeg."});
         }
     }
-       
 });
 
 
@@ -244,41 +250,46 @@ app.route("/admin")
 })
 
 .post( function(req, res) {
-    let user = req.body.username;
-    let pass = req.body.password;
-    Admin.findOne({username: user}, function(err, foundAdmin) {
-        if(!err) {
-            if(foundAdmin.password === md5(pass)) {
-                Podcast.find( {}, function(err, podcast) {
-                    if(!err) {
-                        res.render("admin/home", {podcast});        // here comes next step
-                    }
-                });
-            } else {
-                res.render("admin/login", {alert: "Incorrect username or password"});
+    const user = new Admin({
+        username: req.body.username,
+        password: req.body.password
+    });
+    req.login(user, function(err) {
+        if(err) {
+            console.log(err);
+            res.redirect("/admin");
+        } else {
+            passport.authenticate("local")(req, res, function() {
+                res.redirect("/admin/podcast");             
+                // res.render("admin/login", {alert: "Incorrect username or password"});
+            }); 
+        }       
+    });   
+});
+
+app.route("/admin/podcast")
+
+.get(function(req, res) {
+    if(req.isAuthenticated()) {
+        Podcast.find({}, function(err, podcast) {
+            if(!err) {
+                res.render("admin/home", {podcast, user: req.user.username});       
             }
-        }
+        });
+    } else {
+        res.redirect("/admin");
+    }
+})
+
+.post(function(req, res) {
+    Podcast.updateOne({email: req.body.email, link: req.body.link}, {$set: {approved: req.body.approved}}, function() {
+        res.redirect("/admin/podcast");
     });
 });
 
-app.post("/admin/podcast", function(req, res) {
-    if(req.body.approved === "yes") {
-        Podcast.updateOne({email: req.body.email, link: req.body.link}, {$set: {approved: "yes"}}, function(err) {
-            Podcast.find( {}, function(err, podcast) {
-                if(!err) {
-                    res.render("admin/home", {podcast});        // here comes next step
-                }
-            });
-        });
-    } else if(req.body.approved === "no") {
-        Podcast.updateOne({email: req.body.email, link: req.body.link}, {$set: {approved: "no"}}, function(err) {
-            Podcast.find( {}, function(err, podcast) {
-                if(!err) {
-                    res.render("admin/home", {podcast});        // here comes next step
-                }
-            });
-        });
-    }
+app.post("/logout", function(req, res) {
+    req.logout();
+    res.redirect("/admin");
 });
 
 app.listen(process.env.PORT || 3000, function() {

@@ -26,12 +26,13 @@
       
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 navbar-nav-scroll">
-
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="/admin/home">Home</a>
-          </li> -->
-
+          <li>
+            <form action="/logout" method="post">
+                <button type="submit" class="btn btn-outline-danger"> <%= user %> <i class="fas fa-sign-out-alt"></i> </button>
+            </form>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
+  
