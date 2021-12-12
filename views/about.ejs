@@ -10,9 +10,9 @@
 <div class="about-page">
   <div class="row">
     <div class="col-sm-12 col-lg-8 about-page-padding">
-      <h3>RADIO STATION</h3>
-      <h5>Exclusive Shows | Original Podcasts | And much more</h5>
-      <p class="about-page-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis efficitur placerat nulla, sit amet faucibus augue tincidunt consequat. Duis eget mi neque. Maecenas ullamcorper velit nunc, vitae facilisis metus scelerisque ut. Proin ut neque id ligula mattis iaculis. Donec consequat felis quis mollis congue. Mauris vulputate est eget augue placerat porta.</p>
+      <h3>JIMS Community Radio</h3>
+      <h5>Exclusive Shows | Explore Podcasts | Create Podcasts</h5>
+      <p class="about-page-para">JIMS Vasant Kunj, affiliated to Guru Gobind Singh Indraprastha University, Dwarka is the first college of the university to have launched a community radio station. It provides a platform for dialogue and discussion amongst community, students and faculty. And now it's available online, so you can stream motivational, wellness, educational, and other shows from wherever you are.</p>
       
       <h5 class="contact-form-heading">CONTACT US</h5>
 
@@ -26,18 +26,20 @@
       <% } %>
 
       <form action="/about" method="post">
-        <input class="form-control" type="text" name="name" placeholder="Name" autocomplete="off" required>
-        <input class="form-control" type="email" name="email" placeholder="E-mail" autocomplete="off" required>
-        <textarea class="form-control" name="message" rows="4" placeholder="Message here" required></textarea>
+        <input class="form-control" type="text" name="name" placeholder="Name" minlength="4" required>
+        <input class="form-control" type="email" name="email" placeholder="E-mail" required>
+        <textarea class="form-control" name="message" rows="4" placeholder="Message here" minlength="15" required></textarea>
         <button class="btn w-100" type="submit">SUBMIT</button>
       </form>
     </div>
 
     <div class="col-sm-12 col-lg-4">
       <div class="card">
-        <img src="/images/jims-logo.png" class="card-img-top mx-auto">
+        <a href="https://www.jimsd.org/" target="_blank"><img src="/images/jims-logo.png" alt="JIMS Logo" class="card-img-top mx-auto"></a>
         <div class="card-body">
-          <h5 class="card-title">Jagannath International Management School</h5>
+          <a href="https://www.jimsd.org/" target="_blank" class="text-decoration-none">
+            <h5 class="card-title text-dark">Jagannath International Management School</h5>
+          </a>
           <hr>
           <p class="card-text">
             Affiliated to Guru Gobind Singh Indraprastha University, New Delhi <br>

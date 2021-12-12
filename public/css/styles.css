@@ -127,7 +127,7 @@ body {
 /* About starts here */
 
 .about-content {
-  padding: 25px 90px;
+  padding: 10px 90px 25px;
 }
 
 .accordion button{
@@ -245,9 +245,9 @@ body {
 }
 
 .about-page .card img {
-  margin: 20px 20px 10px;
-  height: 110px;
-  width: 160px;
+  margin: 15px 15px 5px;
+  height: 100px;
+  width: 150px;
 }
 
 .about-page .card-text {
@@ -389,11 +389,14 @@ a.view-more {
 
   /* shows page */
   .all-shows-box {
-    padding: 40px;
+    padding: 20px;
   }
   .audio-scroll-box {
     margin-top: 20px;
     height: 250px;
+  }
+  .audio-box {
+    width: 85%;
   }
   .all-shows-box .row {
     margin: 30px auto;
@@ -402,7 +405,7 @@ a.view-more {
     min-height:300px;
   }
   .cover-card img {
-    height: 250px;
+    height: 260px;
   }
 
   /* podcast page */

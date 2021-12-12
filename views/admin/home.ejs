@@ -11,6 +11,7 @@
                 <th>Podcast</th>
                 <th>Description</th>
                 <th>Approved</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -27,19 +28,24 @@
                     <td> 
                         <% if(element.approved === "no"){ %>
                             <form action="/admin/podcast" method="post">
-                                <input type="email" name="email" value="<%=element.email%>" hidden>
-                                <input type="text" name="link" value="<%= element.link %>" hidden>
+                                <input type="text" name="id" value="<%= element.id %>" hidden>
                                 <input type="text" name="approved" value="yes" hidden>
                                 <button class="btn btn-outline-success mt-2">APPROVE</button>
                             </form>
                         <% } else { %>
                             <form action="/admin/podcast" method="post">
-                                <input type="email" name="email" value="<%=element.email%>" hidden>
-                                <input type="text" name="link" value="<%= element.link %>" hidden>
+                                <input type="text" name="id" value="<%= element.id %>" hidden>
                                 <input type="text" name="approved" value="no" hidden>
                                 <button class="btn btn-outline-danger mt-2">REMOVE</button>
                             </form>
                         <% } %>
+                    </td>
+                    <td>
+                        <form action="/admin/podcast/delete" method="post">
+                            <input type="text" name="id" value="<%= element.id %>" hidden>
+                            <input type="text" name="audio" value="<%= element.link %>" hidden>
+                            <button class="btn btn-outline-danger mt-2"><i class="far fa-trash-alt"></i></button>
+                        </form>
                     </td>
                 </tr>
             <% }); %>

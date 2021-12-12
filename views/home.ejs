@@ -8,16 +8,17 @@
         <h4>TOP SHOWS</h4>
 
         <div class="row shows-box mt-3">
-          <% for(var i=0; i<3; i++) { %>
+          <% let random = [0,5,1]; %>
+          <% random.forEach(function(num) { %>
             <div class="card col-sm-12 col-lg-3">
-                <img src="images/<%= show[i].image %>" class="card-img-top">
+                <img src="images/<%= show[num].image %>" class="card-img-top">
                 <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-quote-right fa-xs"></i>&nbsp; <%= show[i].name %> </h5>
+                  <h5 class="card-title"><i class="fas fa-quote-right fa-xs"></i>&nbsp; <%= show[num].name %> </h5>
                   <hr class="design">
-                  <p class="card-text"> <%= show[i].description %> </p>
+                  <p class="card-text"> <%= show[num].description %> </p>
                 </div>
               </div>
-          <% } %>   
+          <% }); %>   
         </div>
     </div>
 
@@ -44,8 +45,8 @@
               </div>
 
               <div class="col-sm-12 col-lg-10 ps-2 pe-4 pt-1 pod-box-des">
-                <% let description = podcasts[i].description.substring(0, 100) + " ..."; %>
-                <span class="text-start"><p><%= description %></p></span>
+                <% let description = podcasts[i].description.substring(0, 95) + " ..."; %>
+                <span class="text-start"><p id="desc-text-<%= podcasts[i].name %>" ><%= description %></p></span>
                 <footer class="blockquote-footer text-end">Podcast by <cite title="Source Title"><%= podcasts[i].name %></cite></footer>  
               </div>
             
@@ -53,6 +54,11 @@
 
           </div>
         </div>
+        <script>
+          if (window.matchMedia("(max-width: 568px)").matches) {
+            document.getElementById("desc-text-<%= podcasts[i].name %>").innerHTML = document.getElementById("desc-text-<%= podcasts[i].name %>").innerHTML.substring(0, 60) + " ...";
+          }
+        </script>
         <% } %>
 
       </div>
@@ -65,30 +71,38 @@
     <h4>About</h4>
 
     <div class="container-fluid about-content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus quam mauris, quis convallis orci porttitor et. Sed sit amet dui varius, sodales tortor rhoncus, laoreet lacus. Nulla facilisi. Suspendisse nisl odio, tempor quis velit sodales, lobortis ultricies dolor. </p>
+      <div class="row">
+        <div class="col-sm-12 col-lg-2 pt-1">
+          <a href="https://www.jimsd.org/"><img src="/images/jims-logo.png" alt="JIMS Logo"></a>
+        </div>
+        <div class="col-sm-12 col-lg-10 ps-1">
+          <p class="text-justify mt-3 mb-2">JIMS Vasant Kunj, affiliated to Guru Gobind Singh Indraprastha University, Dwarka is the first college of the university to have launched a community radio station. It provides a platform for dialogue and discussion amongst community, students and faculty. And now it's available online, so you can stream motivational, wellness, educational, and other shows from wherever you are.</p>
+        </div>
+      </div>
+     
       <br>
       <div class="accordion accordion-flush" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              What is Radio Station ?
+              What does Community Radio provide ?
             </button>
           </h2>
           <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <strong>Radio Station</strong> orem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper, risus ut posuere vestibulum, dolor orci suscipit risus, in semper tellus enim sed mi. Vivamus non leo condimentum, accumsan quam non, lobortis nulla. Fusce consequat vulputate fringilla. Donec sem tortor, venenatis a rutrum ut, bibendum id urna. Nam elementum tellus eget suscipit ultrices.
+              <strong>Radio JIMS 90.4 MHz</strong> provides voice to the voiceless by addressing problems of social and economic empowerment faced by the community. The content of the programmers is designed and developed by the students and community members themselves.
             </div>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              What does JIMS Radio Station have ? 
+              What does Community Radio do ? 
             </button>
           </h2>
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-              <strong>JIMS, VK</strong> orem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper, risus ut posuere vestibulum, dolor orci suscipit risus, in semper tellus enim sed mi. Vivamus non leo condimentum, accumsan quam non, lobortis nulla. Fusce consequat vulputate fringilla. Donec sem tortor, venenatis a rutrum ut, bibendum id urna. Nam elementum tellus eget suscipit ultrices.
+              <strong>RADIO JIMS 90.4 MHz</strong>  actively collaborates with voluntary organizations such as Rotaract club & DART (Delhi Achievers Round Table Conference). The nature of the partnership is to make the community aware about their rights and duties in the context of the changing environment. This partnership focuses on program excellence that leads to social mobilization and community empowerment.
             </div>
           </div>
         </div>

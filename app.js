@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const ejs = require('ejs');
+const fs = require('fs');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -37,12 +38,11 @@ const fileStorageEngine = multer.diskStorage({
     filename: function(req, file, cb) {
         cb(null, Date.now() + "-" + file.originalname);
     },
-    limits: { fileSize: 20000000 }   // 20mb
+    limits: { fileSize: 15000000 }   // 15MB
 });
 const upload = multer({ storage: fileStorageEngine });
 
-let show = [];
-let sauce = [];                                     // global variables to store shows, category, podcasts.
+let show = [];                                    // global variables to store shows, category, podcasts.
 let podcasts = [];
 
 const showsSchema = new mongoose.Schema ({
@@ -72,14 +72,6 @@ const saucesSchema = new mongoose.Schema ({
 });
 
 const Sauces = new mongoose.model("Sauces", saucesSchema);
-
-Sauces.find( function(err, sauces) {
-  if(err) {
-    console.log("sauces" + err);
-  } else {
-    sauce = sauces;                 // passing to global variable
-  }
-});
 
 const formSchema = new mongoose.Schema({
     name: String,
@@ -119,15 +111,6 @@ passport.use(Admin.createStrategy());
 passport.serializeUser(Admin.serializeUser());
 passport.deserializeUser(Admin.deserializeUser());
 
-function getSauce(code) {
-    let sauces = [];
-    sauce.forEach( function(element) {
-        if(element.code === code) {
-            sauces.push(element);
-        }
-    });
-    return sauces;
-}
 
 function saveForm(name, email, message) {
     const form = new Form({
@@ -150,26 +133,32 @@ function savePodcast(name, email, description, link) {
     podcast.save();
 }
 
+function clearAudio(filename) {
+    fs.unlink(__dirname + "/public/podcasts/" + filename, function(err) {
+        if(err) {
+            console.log(err);
+        }
+    });
+}
+
 app.get("/", function(req, res) { 
     res.render("home", {show, podcasts});
 });
 
 app.get("/shows", function(req, res) {
-    res.render("shows", {show, sauce});
+    Sauces.find({}, function(err, foundSauce) {
+        res.render("shows", {show, sauce: foundSauce});
+    });
 });
 
 app.get("/category/:id", function(req, res) {
-    let category = [];
-    let sauces = [];
 
-    show.forEach( function(element) {
-        if(element.name === req.params.id) {
-            category = element;                       
-            sauces = getSauce(element.code);
-        }
+    Shows.findOne({name: req.params.id}, function(err, foundShow) {
+
+        Sauces.find({code: foundShow.code}, function(err, foundSauce) {
+            res.render("category", {show, category: foundShow, sauces: foundSauce});
+        });
     });
-
-    res.render("category", {show, category, sauces});
 });
 
 app.get("/podcast/record", function(req, res) {
@@ -211,32 +200,35 @@ app.post("/about", [
     }
 });
 
-app.post("/podcast/upload", upload.single('audio'), [
+app.post("/podcast/upload",  upload.single('audio'), [
         check("name", "Name must be 4+ characters long").exists().isLength({min: 4}),
         check("email", "Enter a valid e-mail address").isEmail().normalizeEmail()
-    ], function(req, res) {
+], function(req, res) {
 
     const errors = validationResult(req);
 
     if(!errors.isEmpty()) {
-
         const alert = errors.array();
+        clearAudio(req.file.filename);
         res.render("upload", {show, alert});
-        
-    } else {
-
+    } 
+    
+    else {
         if(req.file.mimetype == "audio/mp3" || req.file.mimetype == "audio/mpeg") {
 
-            Podcast.find( { approved: "no" }, function(err, podcast) {                  // podcast list check
-                if(podcast.length <= 10) {
+            Podcast.find( { approved: "no" }, function(err, NotApproved) {                  // podcast list check
 
+                if(NotApproved.length <= 10) {    
+                         
                     savePodcast(req.body.name, req.body.email, req.body.description, req.file.filename);        // line 127 & 128 changed for now 
-                    res.render("upload", {show, feedback: "Thanks for creating the podcast, it will be posted as soon as it gets approved!"});           
-                } else {        
+                    res.render("upload", {show, feedback: "Thanks for creating the podcast, it will be posted as soon as it gets approved!"});             
+                } else {   
+                    clearAudio(req.file.filename);     
                     res.render("upload", {show, feedback: "There are too many podcasts to be approved. Please try again later!"});
                 }
             });
         } else {
+            clearAudio(req.file.filename);
             res.render("upload", {show, alert: "File type must be mp3/mpeg."});
         }
     }
@@ -282,7 +274,14 @@ app.route("/admin/podcast")
 })
 
 .post(function(req, res) {
-    Podcast.updateOne({email: req.body.email, link: req.body.link}, {$set: {approved: req.body.approved}}, function() {
+    Podcast.updateOne({_id: req.body.id}, {$set: {approved: req.body.approved}}, function() {
+        res.redirect("/admin/podcast");
+    });
+});
+
+app.post("/admin/podcast/delete", function(req, res) {
+    clearAudio(req.body.audio);
+    Podcast.deleteOne({_id: req.body.id}, function() {
         res.redirect("/admin/podcast");
     });
 });
