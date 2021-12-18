@@ -3,7 +3,7 @@
 <!-- PODCAST BANNER -->
 <div class="podcast-page-banner">
   <video muted autoplay loop>
-    <source src="/videos/podcast-vid.mp4#t=4" type="video/mp4" />
+    <source src="/videos/podcast-vid.webm#t=4" type="video/webm" />
   </video>
   <div class="w-100 podcast-page-heading">
     <h4 class="m-0">PODCAST</h4>
@@ -18,7 +18,7 @@
 
       <div class="card col-sm-12 col-lg-2">
         <div class="card-img-top">
-          <img src="images/<%= podcast[i].image %>" />
+          <img src="<%= podcast[i].image %>" alt="<%= podcast[i].name %> Image"/>
         </div>
         <div class="card-body pt-1">
           <div class="card-title"><%= podcast[i].name %> </div>

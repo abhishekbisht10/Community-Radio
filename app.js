@@ -128,7 +128,7 @@ function savePodcast(name, email, description, link) {
         description: description,
         link: link,
         approved: "no",         
-        image: "ts4.png"        // change this to empty
+        image: "https://ucarecdn.com/aa2c48e2-9fc7-4817-bd1f-90e97590b90e/ts4.png"        // change this to empty
     });
     podcast.save();
 }
