@@ -462,3 +462,9 @@ a.view-more {
     padding: 20px 40px;
   }
 }
+@media only screen and (max-width: 520px) {
+  /* home */
+  .home {
+    background-image: url("https://ucarecdn.com/3f57e7cd-aa2f-41ba-9475-7567ed1d6010/homexs.jpg");
+  }
+}
