@@ -1,24 +1,24 @@
 <%- include('partials/header') -%>    
 
+<div id="loader"></div>
 <!-- HOME -->
-<div class="home">
-</div>  
+<div class="home"></div>  
 <!-- SHOW -->
   <div class="shows">
         <h4>TOP SHOWS</h4>
 
         <div class="row shows-box mt-3">
-          <% let random = [0,5,1]; %>
-          <% random.forEach(function(num) { %>
+          <% // let random = [0,5,1]; %>
+          <% for(var i=0; i<3; i++) { %>
             <div class="card col-sm-12 col-lg-3">
-                <img src="<%= show[num].image %>" alt="<%= show[num].name %> Image" class="card-img-top">
+                <img src=<%= show[i].image %> alt="<%= show[i].name %> Image" class="card-img-top">
                 <div class="card-body">
-                  <h5 class="card-title"><i class="fas fa-quote-right fa-xs"></i>&nbsp; <%= show[num].name %> </h5>
+                  <h5 class="card-title"><i class="fas fa-quote-right fa-xs"></i>&nbsp; <%= show[i].name %> </h5>
                   <hr class="design">
-                  <p class="card-text"> <%= show[num].description %> </p>
+                  <p class="card-text"> <%= show[i].description %> </p>
                 </div>
               </div>
-          <% }); %>   
+          <% } %>   
         </div>
     </div>
 
@@ -109,5 +109,9 @@
       </div>
     </div>
   </div>
+
+  <script>
+    window.addEventListener("load", () => document.getElementById("loader").style.display = "none");
+  </script>
 
   <%- include('partials/footer') -%>  

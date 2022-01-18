@@ -2,32 +2,34 @@ body {
   font-family: 'Open sans', sans-serif;
   scroll-behavior: smooth;
 }
-
+#loader {
+  height: 100vh;
+  width: 100%;
+  z-index: 1111;
+  background-image: url("/images/loader.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
 .shows, .category, .about, .podcast, .gallery {
   padding: 50px;
   text-align: center;
 }
-
 .shows, .category, .about {
   color: rgba(0, 0, 0, .6);
 }
-
 .podcast, .gallery, .footer {
   color: #fff;
   background-color: #00E5EE;
 }
-
 .show-page-banner, .podcast-page-banner {
   margin-top: 64px;
   position: relative;
 }
-
 .show-page-banner video, .podcast-page-banner video {
   object-fit: cover;
   width: 100%;
   height: 400px;
 }
-
 .show-page-heading, .podcast-page-heading {
   position: absolute;
   bottom: 1%; 
@@ -36,323 +38,252 @@ body {
   color: rgba(0, 0, 0, .6);
   background-color: rgba(225, 225, 225, 0.5);
 }
-
 .all-shows-box, .podcast-box {
   margin-top: -4px;
   background-color: rgba(225, 225, 225, 0.4);
 }
-
 .about-page, .category-page {
   padding: 60px;
   background-color: rgba(225, 225, 225, 0.4);
 }
-
 .category-page, .record-page {
   margin-top: 65px;
 }
-
 /* Home starts here */
-
 .home {
   height: 700px;
   background-image: url("https://ucarecdn.com/2982dd23-78db-4fd1-9ed3-d339281f2143/home.jpg");
   background-size: cover;
 }
-  
 .navigation {
   font-size: 1.2rem;
-}
-  
+} 
 .logo{
   height: 50px;
   margin-top: -3px;
   margin-bottom: -5px;
-}
-  
+} 
 .navigation-box {
   margin: auto 40px;
-}
-    
+}   
 .nav-link {
   cursor: pointer;
   padding-left: 0.7rem !important;
   padding-right: 0.7rem !important;
 }
-
 .dropdown-item {
   padding: 0.4rem 1.5rem 0.2rem 1rem;
 }
-
 /* Show starts here */
-
 .shows-box {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
-
 .shows .card {
   border: none;
   align-items: center;
 }
-
 .shows .card img {
   height: 150px;
   width: 150px;
 }
-
 /* Podcast starts here */
-
 .pod-box {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   padding-top: 30px;
 }
-
 .podcast .card {
   color: #000;
   margin-bottom: 15px;
 }
-
 .podcast .card img {
   height: 70px;
   width: 70px;
 }
-
 .podcast .card-body {
   margin-bottom: -18px;
 }
-
 /* About starts here */
-
 .about-content {
   padding: 10px 90px 25px;
 }
-
 .accordion button{
   color:rgba(0, 0, 0, .6) !important;
 }
-
 /* Footer starts here */
-
 .footer {
   padding: 40px;
   text-align: center;
 }
-
 .footer a {
   color: #fff;
   text-decoration: none;
 }
-
 /* SHOW BANNER */
-
 .all-shows-box {
   padding: 40px 80px;
 }
-
 .all-shows-box .row {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   margin: 50px auto;
 }
-
 .all-shows-box .card hr {
   margin: 8px auto;
 }
-
 .audio-scroll-box {
   overflow-y:scroll; 
   overflow-x:hidden; 
   height:420px;
   text-align: center;
 }
-
 .cover-card {
   min-height:420px;
 }
-
 /* PODCAST BANNER */
-
 .podcast-box {
   padding: 70px;          
 }
-
 .podcast-box .card {
   text-align: center;
 }
-
 .podcast-box .card img{
   height: 150px;
 }
-
 .podcast-box .card-body {
   padding: 10px;
 }
-
 .podcast-box .card p {
   padding: 25px 5px 10px;
 }
-
 .podcast-box .card-title {
   font-weight: bold;
 }
-
 .space-sm {
   display: none;
 }
-
 /* ABOUT */
-
 .about-page {
   margin-top: 54px;
   text-align: center;
 }
-
 .about-page-padding {
   padding: 0 40px;
 }
-
 .about-page-para {
   margin: 10px 0;
   text-align: justify;
 }
-
 .contact-form-heading {
   margin: 30px 0 20px;
 }
-
 .about-page form input, textarea {
   margin-bottom: 10px;
 }
-
 .about-page button[type=submit] {
   margin-top: 10px;
   color: #fff;
   background-color: #22d5db;
 }
-
 .about-page button[type=submit]:hover {
   background-color: #02b2b8;
 }
-
 .about-page .card {
   border-width: 2px;
   margin: 20px 30px;
   padding: 10px 20px;
 }
-
 .about-page .card img {
   margin: 15px 15px 5px;
   height: 100px;
   width: 150px;
 }
-
 .about-page .card-text {
   margin-top: 10px;
 }
-
 .about-page-details {
   text-align: left;
   margin-bottom: -5px;
 }
-
 .alert {
   font-size: 0.9rem; 
   padding-top: 0.8rem;  
   padding-bottom: 0.8rem;
 }
-
 .alert-dismissible .btn-close {
   padding: 1rem;
 }
-
 /* Category Page  */
-
 .category-jumbo {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-
 .category-left {
   padding-left: 20px !important;
 }
 .category-right {
   padding-right: 20px !important;
 }
-
 .alert-box {
   position: relative;
   min-height: 250px;
   background-color: #fff;
 }
-
 .alert-box .text-muted {
   font-size: 14px;
 }
-
 .audio-box {
   width: 90%;
   position: absolute;
   bottom: 20px;
 }
-
 /*  */
-
 hr.design {
   margin: 12px auto 14px;
 }
-
 a.view-more {
   font-size: 1rem;
   text-decoration: none;
   color: rgba(0, 0, 0, .6);
 }
-
 /* record */
 .record-page {
   padding: 40px 50px;
   color: rgba(0, 0, 0, .6);
   background-color: rgba(225, 225, 225, 0.4);;
 }
-
 .record-page-box, .record-page-img {
   padding: 30px 60px;
 }
-
 .record-page ul li {
   line-height: 1.8;
 }
-
 .record-page button, .btn-blue {
   margin-top: 16px;
   color: #fff;
   background-color: #22d5db;
 }
-
 .record-page button:hover, .btn-blue:hover {
   color: #fff;
   background-color: #02b2b8;
 }
-
 .record-list {
   width: 100%;
   margin-top: 20px;
   text-align: center;
 }
-
 .upload-form input, .upload-form textarea{
   margin-bottom: 5px;
 }
-
 .alert button {
   margin-top: 0;
   background-color: transparent;
 }
-
 
 /* Mobile Site */
 @media only screen and (max-width: 768px) {
@@ -389,7 +320,6 @@ a.view-more {
   .footer i {
     margin: 0 8px;
   }
-
   /* shows page */
   .all-shows-box {
     padding: 20px;
@@ -410,7 +340,6 @@ a.view-more {
   .cover-card img {
     height: 260px;
   }
-
   /* podcast page */
   .podcast-box {
     padding: 40px;
@@ -425,7 +354,6 @@ a.view-more {
   .podcast-box .m-3 {
     display: none;
   }
-
   /* about page */
   .about-page {
     margin-top: 24px;
@@ -437,7 +365,6 @@ a.view-more {
     padding: 0;
     margin: 30px -12px 0;
   }
-
   /* category page */
   .category-page {
     padding: 50px;
@@ -453,7 +380,6 @@ a.view-more {
     max-width: 225px;
     max-height: 200px;
   }
-
   /* record page */
   .record-page {
     padding: 16px;

@@ -42,14 +42,12 @@ window.addEventListener('DOMContentLoaded', () => {
               recordButton.innerText = 'Record';
             }
           });
-
         } catch {
           renderError(
             'Microphone access was denied.'
           );
         }
       });
-
     } else {
       renderError(
         "Your Browser doesn't support the MediaRecorder API."
@@ -99,4 +97,3 @@ window.addEventListener('DOMContentLoaded', () => {
     li.appendChild(anchor);
     list.appendChild(li);
   }
-
